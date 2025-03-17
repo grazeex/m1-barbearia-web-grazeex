@@ -19,27 +19,53 @@ const barbearia = {
   
   
 function buscaCortePorId(id) {
+    const corte = barbearia.cortes.find(c => c.id === id);
+    return corte ? corte : "Corte não encontrado";
 }
 
 function buscaBarbaPorId(id) {
+    const barba = barbearia.barbas.find(b => b.id === id);
+    return barba ? barba : "Barba não encontrada";
 }
 
 function verificaStatusBarbearia() {
+    return barbearia.estaAberto ? "Estamos abertos" : "Estamos fechados";
 }
 
 function retornaTodosCortes() {
+    return barbearia.cortes;
 }
 
 function retornaTodasBarbas() {
+    return barbearia.barbas;
 }
 
 function criaPedido(nomeCliente, corteId, barbaId) {
+    const corte = buscaCortePorId(corteId);
+    const barba = buscaBarbaPorId(barbaId);
+
+    const pedido = {
+        nome: nomeCliente,
+        pedidoCorte: corte.tipo,
+        pedidoCortePreco: corte.valor,
+        pedidoBarba: barba.tipo,
+        pedidoBarbaPreco: barba.valor,
+      };
+      return pedido;
 }
 
+
 function atualizarServico(lista, id, valor, tipo) {
+    const index = lista.findIndex(item => item.id === id);
+    if (index !== -1) {
+        lista[index].tipo = novoTipo;
+        lista[index].valor = novoValor;
+    }
+    return lista;
 }
 
 function calculaTotal(pedido) {
+    return pedido.pedidoCortePreco + pedido.pedidoBarbaPreco;
 }
   
   
